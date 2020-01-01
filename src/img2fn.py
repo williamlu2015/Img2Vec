@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-from util.io import write_plot
+from src.utils import write_plot
 
 
 def image_to_function(input_filename, output_filename):
     """
-    Approximates the image at input_filename by plotting piecewise sine waves
-    using matplotlib. Saves the approximation at output_filename.
+    Approximates the image at input_filename by plotting piecewise sine waves using matplotlib. Saves the approximation
+    at output_filename.
     :param input_filename: the path to the image to approximate
     :param output_filename: the file to save the approximation to
     :return: None
@@ -24,8 +24,8 @@ def image_to_function(input_filename, output_filename):
 
 def _array_to_function(array, output_filename):
     """
-    Approximates the given 2D array of luminance values by plotting piecewise
-    sine waves using matplotlib. Saves the approximation at output_filename.
+    Approximates the given 2D array of luminance values by plotting piecewise sine waves using matplotlib. Saves the
+    approximation at output_filename.
     :param array: the 2D array of luminance values to approximate
     :param output_filename: the file to save the approximation to
     :return: None

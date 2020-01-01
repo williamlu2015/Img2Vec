@@ -1,20 +1,18 @@
 import numpy as np
 from PIL import Image
 
-from util.io import write_file
+from src.utils import write_file
 
 
 def image_to_racket(image_filename, racket_filename):
     """
-    Produces Racket code that draws the image at image_filename. Saves the
-    Racket code to the file at racket_filename.
+    Produces Racket code that draws the image at image_filename. Saves the Racket code to the file at racket_filename.
     :param image_filename: the path to the image to produce Racket code for
     :param racket_filename: the file to save the Racket code at
     :return: None
     """
     with Image.open(image_filename) as image:
-        image = image.convert("RGB")   # technically not necessary since
-        # image.mode == "RGB" by default
+        image = image.convert("RGB")   # technically not necessary since image.mode == "RGB" by default
         array = np.asarray(image)
         racket_string = _to_racket(array)
 
@@ -23,8 +21,8 @@ def image_to_racket(image_filename, racket_filename):
 
 def _to_racket(array, cell_width=3, cell_height=3):
     """
-    Produces Racket code that approximates the given RGB array. Groups of
-    adjacent pixels in the array are averaged in the Racket code.
+    Produces Racket code that approximates the given RGB array. Groups of adjacent pixels in the array are averaged in
+    the Racket code.
     :param array: the RGB array to produce Racket code for
     :param cell_width: the number of horizontally adjacent pixels to average
     :param cell_height: the number of vertically adjacent pixels to average
@@ -53,9 +51,8 @@ def _to_racket(array, cell_width=3, cell_height=3):
 
 def _to_rectangle(array, x0, y0, x1, y1):
     """
-    Averages the colors of the pixels of array that have x-value in [x0, x1) and
-    y-value in [y0, y1). Returns Racket code that draws a rectangle of the
-    average color and size (x1 - x0) by (y1 - y0).
+    Averages the colors of the pixels of array that have x-value in [x0, x1) and y-value in [y0, y1). Returns Racket
+    code that draws a rectangle of the average color and size (x1 - x0) by (y1 - y0).
     :param array: the 3D array to average the pixels of
     :param x0: the left-bound (inclusive) of the pixels to average
     :param y0: the upper-bound (inclusive) of the pixels to average
@@ -75,10 +72,8 @@ def _to_rectangle(array, x0, y0, x1, y1):
 
 def _to_color(rgb):
     """
-    Returns Racket code that produces a Racket color object with the given RGB
-    values.
-    :param rgb: a list of length 3, with the red, green, and blue values, in
-    that order
+    Returns Racket code that produces a Racket color object with the given RGB values.
+    :param rgb: a list of length 3, with the red, green, and blue values, in that order
     :return: the Racket code that produces the Racket color object
     """
     return f"(color {rgb[0]} {rgb[1]} {rgb[2]})"
